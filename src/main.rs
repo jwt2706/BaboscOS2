@@ -1,13 +1,15 @@
-#![no_std]
+#![no_std] // dont use the standard library, since were doing in raw
 #![no_main]
 
 use core::panic::PanicInfo;
 
+// da handler of the panic
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 
+// this is the entry point, for now
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     loop {}
