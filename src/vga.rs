@@ -6,7 +6,6 @@ use lazy_static::lazy_static;
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u8)]
-
 pub enum Color {
     Black = 0,
     Blue = 1,
@@ -28,7 +27,6 @@ pub enum Color {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(transparent)]
-
 struct ColorCode(u8);
 
 impl ColorCode {
@@ -39,7 +37,6 @@ impl ColorCode {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(C)]
-
 struct ScreenChar {
     ascii_character: u8,
     color_code: ColorCode,
@@ -49,7 +46,6 @@ const BUFFER_HEIGHT: usize = 25;
 const BUFFER_WIDTH: usize = 80;
 
 #[repr(transparent)]
-
 struct Buffer {
     chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
@@ -137,19 +133,19 @@ lazy_static! {
     });
 }
 
-
-
 // modify print! and println! to use the functions i defined, so i can use them to print on the
 // screen
 #[macro_export]
 macro_rules! print {
     ($($arg:tt)*) => ($crate::vga::_print(format_args!($($arg)*)));
 }
+
 #[macro_export]
 macro_rules! println {
     () => ($crate::print!("\n"));
     ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
 }
+
 #[doc(hidden)]
 pub fn _print(args: fmt::Arguments) {
     use core::fmt::Write;

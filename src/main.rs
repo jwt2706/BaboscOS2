@@ -18,3 +18,4 @@ pub extern "C" fn _start() -> ! {
     println!("BaboscOS2 booted successfully!");
     loop {}
 }
+
