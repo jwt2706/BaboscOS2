@@ -14,6 +14,8 @@ fn panic(_info: &PanicInfo) -> ! {
 // this is the entry point, for now
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    vga::boot_msg();
+    use core::fmt::Write;
+    //write!(vga::WRITER.lock(), "The answer to the universe {}.", 42).unwrap();
+    vga::WRITER.lock().write_str("\nBaboscOS2 booted successfully!").unwrap();
     loop {}
 }
