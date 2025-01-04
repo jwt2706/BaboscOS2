@@ -7,15 +7,14 @@ use core::panic::PanicInfo;
 
 // da handler of the panic
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
     loop {}
 }
 
 // this is the entry point, for now
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    use core::fmt::Write;
-    //write!(vga::WRITER.lock(), "The answer to the universe {}.", 42).unwrap();
-    vga::WRITER.lock().write_str("\nBaboscOS2 booted successfully!").unwrap();
+    println!("BaboscOS2 booted successfully!");
     loop {}
 }
